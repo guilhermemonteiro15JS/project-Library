@@ -1,3 +1,4 @@
+
 import React from "react";
 import { BrowserRouter, Router, Route, Routes, Link } from "react-router-dom";
 import Home from "./pages/home";
@@ -18,6 +19,7 @@ import {
   FormControl,
   Button,
 } from "react-bootstrap";
+
 
 const App = () => {
   return (
@@ -62,6 +64,7 @@ const App = () => {
               <Route path="/signIn" element={<SignIn />} />
               <Route path="/search" element={<Search />} />
             </Routes>
+
           </Col>
         </Row>
       </Container>
