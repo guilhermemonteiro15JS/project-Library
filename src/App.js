@@ -5,8 +5,10 @@ import Home from "./pages/home";
 import SignIn from "./pages/signin";
 import Library from "./pages/library";
 import Search from "./pages/search";
+import Registration from "./pages/registration";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
+
 import "./App.css";
 
 import {
@@ -38,6 +40,7 @@ const App = () => {
             <Nav.Link href="/home">Home</Nav.Link>
             <Nav.Link href="/library">Library</Nav.Link>
             <Nav.Link href="/signIn">SignIn</Nav.Link>
+            <Nav.Link href="/registration">Registration</Nav.Link>
             <div className="search-container ml-auto">
               <div className="input-group">
                 <FormControl
@@ -63,6 +66,7 @@ const App = () => {
               <Route path="/library" element={<Library />} />
               <Route path="/signIn" element={<SignIn />} />
               <Route path="/search" element={<Search />} />
+              <Route path="/registration" element={<Registration />} />
             </Routes>
 
           </Col>
