@@ -2,8 +2,9 @@ import React from 'react';
 
 const Library = () => {
   return (
-  <div>Library Page</div>
+  <div>Categorys</div>
 
+  
   )
 };
 
