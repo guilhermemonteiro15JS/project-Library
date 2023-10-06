@@ -2,7 +2,7 @@
 import React from "react";
 import { BrowserRouter, Router, Route, Routes, Link } from "react-router-dom";
 import Home from "./pages/home";
-import SignIn from "./pages/signin";
+import Login from "./pages/Login";
 import Library from "./pages/library";
 import Search from "./pages/search";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -37,7 +37,7 @@ const App = () => {
           <Nav className="nav-bar">
             <Nav.Link href="/home">Home</Nav.Link>
             <Nav.Link href="/library">Library</Nav.Link>
-            <Nav.Link href="/signIn">SignIn</Nav.Link>
+            <Nav.Link href="/login">Login</Nav.Link>
             <div className="search-container ml-auto">
               <div className="input-group">
                 <FormControl
@@ -61,7 +61,7 @@ const App = () => {
             <Routes>
               <Route path="/home" element={<Home />} />
               <Route path="/library" element={<Library />} />
-              <Route path="/signIn" element={<SignIn />} />
+              <Route path="/login" element={<Login />} />
               <Route path="/search" element={<Search />} />
             </Routes>
 
