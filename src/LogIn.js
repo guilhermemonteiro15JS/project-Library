@@ -1,19 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
-const LogIn = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+const signIn = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
-  const handleLogin = (e) => {
+  const handlesignIn = (e) => {
     e.preventDefault();
-    console.log('Email:', email);
-    console.log('Password:', password);
+    console.log("Email:", email);
+    console.log("Password:", password);
   };
 
   return (
     <div>
       <h2>Log In </h2>
-      <form onSubmit={handleLogin}>
+      <form onSubmit={handlesignIn}>
         <div className="form-group">
           <label>Email:</label>
           <input
@@ -44,4 +44,4 @@ const LogIn = () => {
   );
 };
 
-export default LogIn;
+export default signIn;
