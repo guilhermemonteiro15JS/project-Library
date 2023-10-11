@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import './index.css'
 
 const SignIn = () => {
   const [email, setEmail] = useState('');
@@ -9,10 +10,11 @@ const SignIn = () => {
     console.log('Email:', email);
     console.log('Password:', password);
   };
+  
 
   return (
     <div>
-      <h2>Sign In </h2>
+      <h1 id="titulo_SignIn">Sign In </h1>
       <form onSubmit={handleLogin}>
         <div className="form-group">
           <label>Email:</label>
