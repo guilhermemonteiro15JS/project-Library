@@ -1,14 +1,32 @@
 import React, { useState } from 'react';
+import { useNavigate } from "react-router-dom";
 import './index.css'
 
 const SignIn = () => {
+  const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   const handleLogin = (e) => {
     e.preventDefault();
-    console.log('Email:', email);
-    console.log('Password:', password);
+  
+    
+    fetch("http://5.22.217.225:8081/api/v1/auth/login", {
+      method: 'POST',
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify({
+        "email": "csoares@example.com",
+        "password": "secret"
+      }),
+      redirect: 'follow'
+    })
+      .then(response => response.text())
+      .then(result => {
+        alert('login sucessful:');
+        navigate('/library');
+        console.log(result);
+      })
+      .catch(error => console.log('error', error));
   };
   
 
@@ -47,23 +65,3 @@ const SignIn = () => {
 };
 
 export default SignIn;
-
-var myHeaders = new Headers();
-myHeaders.append("Content-Type", "application/json");
-
-var raw = JSON.stringify({
-  "email": "csoares@example.com",
-  "password": "secret"
-});
-
-var requestOptions = {
-  method: 'POST',
-  headers: myHeaders,
-  body: raw,
-  redirect: 'follow'
-};
-
-fetch("http://5.22.217.225:8081/api/v1/auth/login", requestOptions)
-  .then(response => response.text())
-  .then(result => console.log(result))
-  .catch(error => console.log('error', error));

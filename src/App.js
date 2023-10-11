@@ -38,7 +38,6 @@ const App = () => {
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="nav-bar">
             <Nav.Link href="/home">Home</Nav.Link>
-            <Nav.Link href="/library">Library</Nav.Link>
             <Nav.Link href="/signIn">SignIn</Nav.Link>
             <Nav.Link href="/registration">Registration</Nav.Link>
             <div className="search-container ml-auto">
