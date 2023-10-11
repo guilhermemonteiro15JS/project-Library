@@ -1,33 +1,56 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { FormControl, Button } from "react-bootstrap";
-import data from "./data";
 
 const Search = () => {
   const [searchInput, setSearchInput] = useState("");
-  const [filteredData, setFilteredData] = useState(data);
+  const [filteredData, setFilteredData] = useState([]);
+  const [data, setData] = useState([]);
 
-  const handleChange = (e) => {
+  useEffect(() => {
+    fetchBooks();
+  }, []);
+
+  const fetchBooks = async () => {
+    try{
+    const response = await fetch("http://5.22.217.225:8081/api/v1/book/");
+    const result = await response.json();
+    console.log(result);
+
+    const booksData = result.data;
+    console.log(booksData);
+
+    setData(booksData);
+    }catch (error){
+      console.error("Error fetching data:", error);
+    }
+  };
+
+   const handleChange = (e) => {
     const inputValue = e.target.value;
     setSearchInput(inputValue);
 
     // Filtrar os dados com base no valor da entrada de pesquisa
-    const filteredBooks = data[0].data.filter((book) =>
+      const filteredBooks = data.filter((book) =>
       book.title.toLowerCase().includes(inputValue.toLowerCase())
-    );
+      )
+    setFilteredData(filteredBooks); 
+    /* else {
+      setFilteredData([]);
+    } */
 
     // Armazenar os dados filtrados no estado
-    setFilteredData(filteredBooks);
+    
   };
-
+  
   return (
     <div>
       <input
         type="search"
         placeholder="Search here"
-        onChange={handleChange}
+        onChange={(e) => handleChange(e)}
         value={searchInput}
       />
-
+<button onClick={handleChange}>Search</button>
       <table>
         <thead>
           <tr>
@@ -38,7 +61,7 @@ const Search = () => {
         </thead>
         <tbody>
           {filteredData.map((book, index) => (
-            <tr key={book.id}>
+            <tr key={index}>
               <td>{book.title}</td>
               <td>{book.year}</td>
               <td>{book.description}</td>
@@ -51,8 +74,6 @@ const Search = () => {
 };
 
 export default Search;
-
-
 
 //   <div className="search-container ml-auto">
 //   <div className="input-group">
