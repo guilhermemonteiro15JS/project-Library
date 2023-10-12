@@ -6,10 +6,12 @@ import SignIn from "./pages/signin";
 import Library from "./pages/library";
 import Search from "./pages/search";
 import Registration from "./pages/registration";
+import Footer from "./pages/components/footer";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
-
 import "./App.css";
+import styled from "styled-components";
+
 
 import {
   Container,
@@ -25,6 +27,7 @@ import {
 
 const App = () => {
   return (
+
     <BrowserRouter>
       <Navbar
         collapseOnSelect
@@ -58,6 +61,7 @@ const App = () => {
           </Nav>
         </Navbar.Collapse>
       </Navbar>
+      
       <Container>
         <Row>
           <Col>
@@ -68,11 +72,13 @@ const App = () => {
               <Route path="/search" element={<Search />} />
               <Route path="/registration" element={<Registration />} />
             </Routes>
-
           </Col>
         </Row>
       </Container>
+      <Footer />
+
     </BrowserRouter>
+   
   );
 };
 
