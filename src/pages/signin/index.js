@@ -1,6 +1,63 @@
 import React, { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import './index.css'
+import styled from "styled-components";
+import imagem from "../../assets/3DBooks.jpeg";
+
+const SigninStyled = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+const ImageContainer = styled.div`
+  text-align: center;
+  flex: 1;
+  padding: 2rem;
+`;
+
+const Image = styled.img`
+  max-width: 350px;
+  height: 350px;
+`;
+
+const FormContainer = styled.div`
+  flex: 1;
+
+`;
+
+const Form = styled.form` //styledd form
+  display: flex;
+  flex-direction: column;
+  margin:20px;
+`;
+
+const FormGroup = styled.div` //space betwem lines 
+  margin-bottom: 15px; 
+  display:flex;
+  justify-content:center;
+  align-items:center;
+`;
+
+const Label = styled.label`
+  font-weight: 1;
+`;
+
+const Input = styled.input`
+  padding: 10px;
+  margin-top: 5px;
+  margin-left: 10px;
+  display:flex;
+  align-items: center;
+  justify-content:center;
+`;
+
+const Button = styled.button`
+  padding: 10px 20px;
+  background-color: #30A9D9;
+  color: white;
+  border: none;
+  cursor: pointer;
+`;
 
 const SignIn = () => {
   const navigate = useNavigate();
@@ -31,36 +88,39 @@ const SignIn = () => {
   
 
   return (
-    <div>
-      <h1 id="titulo_SignIn">Sign In </h1>
-      <form onSubmit={handleLogin}>
-        <div className="form-group">
-          <label>Email:</label>
-          <input
-            type="email"
-            className="form-control"
-            placeholder="Digite seu email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label>Password:</label>
-          <input
-            type="password"
-            className="form-control"
-            placeholder="Digite sua senha"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-        </div>
-        <button type="submit" className="btn btn-primary">
-          Entrar
-        </button>
-      </form>
-    </div>
+    <SigninStyled>
+      <ImageContainer>
+        <Image src={imagem} alt="Imagem de leitura" />
+      </ImageContainer>
+    
+      <FormContainer>
+        <h1 id="titulo_SignIn">Sign In</h1>
+        <Form onSubmit={handleLogin}>
+          <FormGroup>
+            <Label>Email:</Label>
+            <Input
+              type="email"
+              placeholder="Digite seu email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+          </FormGroup>
+          <FormGroup>
+            <Label>Password:</Label>
+            <Input
+              type="password"
+              placeholder="Digite sua senha"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+          </FormGroup>
+          <Button type="submit">Entrar</Button>
+        </Form>
+      </FormContainer>
+      </SigninStyled>
+   
   );
 };
 
