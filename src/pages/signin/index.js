@@ -85,7 +85,6 @@ const SignIn = () => {
       })
       .catch(error => console.log('error', error));
   };
-  
 
   return (
     <SigninStyled>

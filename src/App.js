@@ -1,4 +1,3 @@
-
 import React from "react";
 import { BrowserRouter, Router, Route, Routes, Link } from "react-router-dom";
 import Home from "./pages/home";
@@ -6,10 +5,11 @@ import SignIn from "./pages/signin";
 import Library from "./pages/library";
 import Search from "./pages/search";
 import Registration from "./pages/registration";
+import Footer from "./pages/components/footer";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
-
 import "./App.css";
+import styled from "styled-components";
 
 import {
   Container,
@@ -21,6 +21,13 @@ import {
   FormControl,
   Button,
 } from "react-bootstrap";
+
+const BodyApp = styled.body`
+  min-height: 100vh;
+  background-color: papayawhip;
+  margin: 0 auto;
+`;
+
 
 
 const App = () => {
@@ -54,24 +61,24 @@ const App = () => {
                 </div>
               </div>
             </div>
-          </Nav>
-        </Navbar.Collapse>
-      </Navbar>
-      <Container>
-        <Row>
-          <Col>
-            <Routes>
-              <Route path="/home" element={<Home />} />
-              <Route path="/library" element={<Library />} />
-              <Route path="/signIn" element={<SignIn />} />
-              <Route path="/search" element={<Search />} />
-              <Route path="/registration" element={<Registration />} />
-            </Routes>
-
-          </Col>
-        </Row>
-      </Container>
-    </BrowserRouter>
+            </Nav>
+          </Navbar.Collapse>
+        </Navbar>
+        <Container>
+          <Row>
+            <Col>
+              <Routes>
+                <Route path="/home" element={<Home />} />
+                <Route path="/library" element={<Library />} />
+                <Route path="/signIn" element={<SignIn />} />
+                <Route path="/search" element={<Search />} />
+                <Route path="/registration" element={<Registration />} />
+              </Routes>
+            </Col>
+          </Row>
+        </Container>
+        <Footer />
+      </BrowserRouter>
   );
 };
 
