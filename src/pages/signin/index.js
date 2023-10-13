@@ -38,12 +38,12 @@ const FormGroup = styled.div` //space betwem lines
 `;
 
 const Label = styled.label`
-  font-weight: bold;
+  font-weight: 1;
 `;
 
 const Input = styled.input`
   padding: 10px;
-  margin-top: 5px; /* Adicione um pequeno espaçamento superior */
+  margin-top: 5px;
   margin-left: 10px;
   display:flex;
   align-items: center;

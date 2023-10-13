@@ -36,7 +36,7 @@ const App = () => {
         variant="dark"
         className="sticky-top"
       >
-        <Navbar.Brand href="/home">Library Store </Navbar.Brand>
+        <Navbar.Brand href="/home">Book da Wish</Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="nav-bar">
