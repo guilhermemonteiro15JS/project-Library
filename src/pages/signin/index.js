@@ -64,16 +64,39 @@ const SignIn = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-  
-    
-    fetch("http://5.22.217.225:8081/api/v1/auth/login", {
+    let response;
+    try {
+      response = await fetch(
+        "http://5.22.217.225:8081/api/v1/auth/login",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            email: email,
+            password: password,
+          }),
+          redirect: "follow",
+        }
+      );
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+    if (response?.ok) {
+      console.log('Use the response here!');
+      alert('login sucessful:');
+      navigate('/library');
+    } else {
+      console.log(`HTTP Response Code: ${response?.status}`)
+    }
+  };
+    /* fetch("http://5.22.217.225:8081/api/v1/auth/login", {
       method: 'POST',
       headers: {"Content-Type": "application/json"},
       body: JSON.stringify({
-        "email": "csoares@example.com",
-        "password": "secret"
+        "email": email,
+        "password": password,
       }),
       redirect: 'follow'
     })
@@ -84,7 +107,7 @@ const SignIn = () => {
         console.log(result);
       })
       .catch(error => console.log('error', error));
-  };
+  }; */
 
   return (
     <SigninStyled>
