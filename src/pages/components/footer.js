@@ -4,16 +4,17 @@ import styled from "styled-components";
 const StyledFooter = styled.footer `
     background-color: #F2B705;
     text-align: center;
-    font-size: 10px;
+    font-size: 20px;
     color: black;
     text-shadow: 1px;
     padding: 1rem;
     position: relative;
+    margin:5px;
 `;
 
-const SryledGit = styled.i `
+const StyledGit = styled.i `
     color: white;
-`
+`;
 
 const Footer = () => {
     return (

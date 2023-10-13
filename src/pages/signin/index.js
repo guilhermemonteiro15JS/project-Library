@@ -3,7 +3,7 @@ import "./index.css";
 import styled from "styled-components";
 import imagem from "../../assets/3DBooks.jpeg";
 
-const SigninStyled = styled.div `
+const SigninStyled = styled.div`
   display: flex;
   align-items: center;
 `;
@@ -21,15 +21,20 @@ const Image = styled.img`
 
 const FormContainer = styled.div`
   flex: 1;
+
 `;
 
 const Form = styled.form` //styledd form
   display: flex;
   flex-direction: column;
+  margin:20px;
 `;
 
 const FormGroup = styled.div` //space betwem lines 
   margin-bottom: 15px; 
+  display:flex;
+  justify-content:center;
+  align-items:center;
 `;
 
 const Label = styled.label`
@@ -39,6 +44,10 @@ const Label = styled.label`
 const Input = styled.input`
   padding: 10px;
   margin-top: 5px; /* Adicione um pequeno espaçamento superior */
+  margin-left: 10px;
+  display:flex;
+  align-items: center;
+  justify-content:center;
 `;
 
 const Button = styled.button`
