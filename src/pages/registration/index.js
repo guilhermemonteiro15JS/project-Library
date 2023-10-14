@@ -1,9 +1,10 @@
-import React, {useState} from "react";
-
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Registration = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
-    firstName: "",
+    name: "",
     email: "",
     password: "",
   });
@@ -14,20 +15,42 @@ const Registration = () => {
   };
 
   const handleSubmit = (e) => {
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+
+    var requestOptions = {
+      method: "POST",
+      headers: myHeaders,
+      body: JSON.stringify(formData)
+      }
+      
+    
+ 
+    fetch("http://5.22.217.225:8081/api/v1/auth/register", requestOptions)
+      .then((response) => response.text())
+      .then((result) => {
+        alert('Registration sucessful:');
+        navigate('/SignIn');
+        console.log(result);
+      })
+      .catch((error) => console.log("error", error));
+
     e.preventDefault();
     console.log("Form submitted:", formData);
+  
   };
-
+  
   return (
     <div>
       <h2>Registration</h2>
       <form onSubmit={handleSubmit}>
         <div>
-          <label htmlFor="firstName">First Name:</label>
+          <label htmlFor="name">First Name:</label>
           <input
             type="text"
-            id="firstName"
-            name="firstName"
+            placeholder="Digite seu nome"
+            id="name"
+            name="name"
             value={formData.name}
             onChange={handleInputChange}
           />
@@ -36,6 +59,7 @@ const Registration = () => {
           <label htmlFor="email">Email:</label>
           <input
             type="email"
+            placeholder="Digite seu email"
             id="email"
             name="email"
             value={formData.email}
@@ -46,6 +70,7 @@ const Registration = () => {
           <label htmlFor="password">Password:</label>
           <input
             type="password"
+            placeholder="Digite sua senha"
             id="password"
             name="password"
             value={formData.password}

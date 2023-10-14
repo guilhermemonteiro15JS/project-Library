@@ -61,8 +61,15 @@ const Button = styled.button`
 
 const SignIn = () => {
   const navigate = useNavigate();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -71,10 +78,7 @@ const SignIn = () => {
     fetch("http://5.22.217.225:8081/api/v1/auth/login", {
       method: 'POST',
       headers: {"Content-Type": "application/json"},
-      body: JSON.stringify({
-        "email": "csoares@example.com",
-        "password": "secret"
-      }),
+      body: JSON.stringify(formData),
       redirect: 'follow'
     })
       .then(response => response.text())
@@ -99,9 +103,10 @@ const SignIn = () => {
             <Label>Email:</Label>
             <Input
               type="email"
+              name="email"
               placeholder="Digite seu email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              value={formData.email}
+              onChange={handleInputChange}
               required
             />
           </FormGroup>
@@ -109,9 +114,10 @@ const SignIn = () => {
             <Label>Password:</Label>
             <Input
               type="password"
+              name="password"
               placeholder="Digite sua senha"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              value={formData.password}
+              onChange={handleInputChange}
               required
             />
           </FormGroup>
