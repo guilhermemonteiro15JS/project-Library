@@ -38,8 +38,6 @@ const Search = () => {
       setFilteredData([]);
     } */
 
-    // Armazenar os dados filtrados no estado
-    
   };
   
   return (
@@ -50,13 +48,16 @@ const Search = () => {
         onChange={(e) => handleChange(e)}
         value={searchInput}
       />
-<button onClick={handleChange}>Search</button>
+<button onClick={(e) => handleChange(e)}>Search</button>
       <table>
         <thead>
           <tr>
             <th>Title</th>
             <th>Year</th>
             <th>Description</th>
+            <th>
+              Cover
+            </th>
           </tr>
         </thead>
         <tbody>
@@ -65,6 +66,9 @@ const Search = () => {
               <td>{book.title}</td>
               <td>{book.year}</td>
               <td>{book.description}</td>
+              <td>
+                <img src={book.book_cover}/>
+              </td>
             </tr>
           ))}
         </tbody>
@@ -74,18 +78,3 @@ const Search = () => {
 };
 
 export default Search;
-
-//   <div className="search-container ml-auto">
-//   <div className="input-group">
-//     <FormControl
-//       type="text"
-//       placeholder="Search"
-//       className="mr-sm-2"
-//     />
-//     <div className="input-group-append">
-//       <Button variant="outline-info" className="custom-button">
-//         <span className="bi bi-search"></span>
-//       </Button>
-//     </div>
-//   </div>
-// </div>

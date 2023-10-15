@@ -3,7 +3,7 @@ import { BrowserRouter, Router, Route, Routes, Link } from "react-router-dom";
 import Home from "./pages/home";
 import SignIn from "./pages/signin";
 import Library from "./pages/library";
-import Search from "./pages/search";
+import Search from "./components/SearchTerm";
 import Registration from "./pages/registration";
 import Footer from "./pages/components/footer";
 import "bootstrap/dist/css/bootstrap.min.css";

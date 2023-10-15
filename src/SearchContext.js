@@ -1,0 +1,53 @@
+import React, { createContext, useContext, useState, useEffect} from "react";
+
+const SearchContext = createContext();
+
+export const useSearch = () => {
+  return useContext(SearchContext);
+};
+
+export const SearchProvider = ({ children }) => {
+  const [searchInput, setSearchInput] = useState("");
+  const [filteredData, setFilteredData] = useState([]);
+  const [data, setData] = useState([]);
+
+
+  const fetchBooks = async () => {
+    try {
+      const response = await fetch("http://5.22.217.225:8081/api/v1/book/");
+      const result = await response.json();
+      console.log(result);
+
+      const booksData = result.data;
+      console.log(booksData);
+
+      return booksData;
+    } catch (error) {
+      console.error("Error fetching data:", error);
+      return [];
+    }
+  };
+
+  const handleSearch = (inputValue) => {
+    setSearchInput(inputValue);
+       // Filtrar os dados com base no valor da entrada de pesquisa
+       const filteredBooks = data.filter((book) =>
+       book.title.toLowerCase().includes(inputValue.toLowerCase())
+     );
+     setFilteredData(filteredBooks);
+  };
+
+  // Fetch data when the context is initialized
+  useEffect(() => {
+    fetchBooks().then((booksData) => {
+      setData(booksData);
+    });
+  }, []);
+
+
+  return (
+    <SearchContext.Provider value={{ searchInput, filteredData, handleSearch }}>
+      {children}
+    </SearchContext.Provider>
+  );
+};
