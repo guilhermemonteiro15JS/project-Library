@@ -1,99 +1,133 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import './index.css'
+import "./index.css";
 import styled from "styled-components";
 import imagem from "../../assets/3DBooks.jpeg";
 
 const SigninStyled = styled.div`
   display: flex;
+  justify-content: center;
   align-items: center;
+  height: 100vh;
 `;
 
 const ImageContainer = styled.div`
-  text-align: center;
-  flex: 1;
-  padding: 2rem;
+  text-align: center; /* Centraliza horizontalmente */
+  padding-right: 2rem;
+  
 `;
 
 const Image = styled.img`
-  max-width: 350px;
-  height: 350px;
+  max-width: 450px;
+  /* height: 350px;
+  max-width: 500px; */
+  height: auto;
 `;
 
 const FormContainer = styled.div`
-  flex: 1;
-
+  margin-top: 10px;
+  font-size: 20px;
+  /* display: flex; */
+  justify-content: center;
+  flex: 0;
+  text-align: center;
 `;
 
-const Form = styled.form` //styledd form
+const SignInTitle = styled.h1 `
+  font-size: 24px;
+  margin-bottom: 10px;
+`
+
+const Form = styled.form`
   display: flex;
   flex-direction: column;
-  margin:20px;
+  align-items: center;
+  margin: 20px;
+  text-align: left;
+  max-width: 300px;
 `;
 
-const FormGroup = styled.div` //space betwem lines 
-  margin-bottom: 15px; 
-  display:flex;
-  justify-content:center;
-  align-items:center;
+const FormGroup = styled.div`
+  /* margin-bottom: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start; */
+  margin-bottom: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 `;
 
 const Label = styled.label`
+  /* font-weight: 1;
+  margin-top: 10px;
+  font-size: 20px;
+  text-align: left; */
   font-weight: 1;
+  margin-top: 10px;
+  font-size: 20px;
+  text-align: left; 
 `;
 
 const Input = styled.input`
-  padding: 10px;
+  /* padding: 10px;
   margin-top: 5px;
   margin-left: 10px;
-  display:flex;
+  display: block;
   align-items: center;
-  justify-content:center;
+  justify-content: center;
+  text-align: left; */
+  padding: 10px;
+  margin-top: 5px;
+  display: block;
+  text-align: left;
+
 `;
 
 const Button = styled.button`
-  padding: 10px 20px;
-  background-color: #30A9D9;
-  color: white;
-  border: none;
+  border-radius: 20px;
+  background-color: #30a9d9;
+  color: #fff;
+  padding: 18px 30px;
+  font-size: 20px;
+  outline: none;
   cursor: pointer;
+  border: none;
 `;
 
 const SignIn = () => {
   const navigate = useNavigate();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const handleLogin = (e) => {
     e.preventDefault();
-  
-    
+
     fetch("http://5.22.217.225:8081/api/v1/auth/login", {
-      method: 'POST',
-      headers: {"Content-Type": "application/json"},
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        "email": "csoares@example.com",
-        "password": "secret"
+        email: "csoares@example.com",
+        password: "secret",
       }),
-      redirect: 'follow'
+      redirect: "follow",
     })
-      .then(response => response.text())
-      .then(result => {
-        alert('login sucessful:');
-        navigate('/library');
+      .then((response) => response.text())
+      .then((result) => {
+        alert("login sucessful:");
+        navigate("/library");
         console.log(result);
       })
-      .catch(error => console.log('error', error));
+      .catch((error) => console.log("error", error));
   };
 
   return (
     <SigninStyled>
       <ImageContainer>
-        <Image src={imagem} alt="Imagem de leitura" />
+        <Image src={imagem} alt="Crianças lendo livros na biblioteca" />
       </ImageContainer>
-    
       <FormContainer>
-        <h1 id="titulo_SignIn">Sign In</h1>
+      <SignInTitle>Sign In</SignInTitle>
         <Form onSubmit={handleLogin}>
           <FormGroup>
             <Label>Email:</Label>
@@ -118,8 +152,7 @@ const SignIn = () => {
           <Button type="submit">Entrar</Button>
         </Form>
       </FormContainer>
-      </SigninStyled>
-   
+    </SigninStyled>
   );
 };
 

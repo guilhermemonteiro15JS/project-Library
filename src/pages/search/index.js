@@ -74,18 +74,3 @@ const Search = () => {
 };
 
 export default Search;
-
-//   <div className="search-container ml-auto">
-//   <div className="input-group">
-//     <FormControl
-//       type="text"
-//       placeholder="Search"
-//       className="mr-sm-2"
-//     />
-//     <div className="input-group-append">
-//       <Button variant="outline-info" className="custom-button">
-//         <span className="bi bi-search"></span>
-//       </Button>
-//     </div>
-//   </div>
-// </div>
