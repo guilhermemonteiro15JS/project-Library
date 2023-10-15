@@ -7,14 +7,14 @@ import { SearchProvider } from "../../SearchContext";
 const Library = () => {
   return (
     <SearchProvider>
-          <div className="holder">
+          <div id="holder">
       <header className="header">
         <div className="header-content flex flex-c text-center text-white">
           <h2 className="header-title text-capitalize"> Find your book</h2>
           <SearchTerm/>
         </div>
       </header>
-      <div >
+      <div className="div-grid" >
       <BookList />
         </div>
       </div>

@@ -8,33 +8,6 @@ const BookList = () => {
     const{filteredData} = useSearch();;
   const [selectedBook, setSelectedBook] = useState(null);
 
-  /*useEffect(() => {
-    fetchBooks();
-  }, []);
-
-  const fetchBooks = async () => {
-    try {
-      const response = await fetch("http://5.22.217.225:8081/api/v1/book/");
-      const result = await response.json();
-      console.log(result);
-
-      const booksData = result.data;
-      console.log(booksData);
-
-      setData(booksData);
-    } catch (error) {
-      console.error("Error fetching data:", error);
-    }
-  }; */
-
-/*   const handleSearch = (inputValue) => {
-    // Filtrar os dados com base no valor da entrada de pesquisa
-    const filteredBooks = data.filter((book) =>
-      book.title.toLowerCase().includes(inputValue.toLowerCase())
-    );
-    setFilteredData(filteredBooks);
-  }; */
-
   const handleClick = (book) => {
     setSelectedBook(book);
   };
@@ -44,30 +17,30 @@ const BookList = () => {
   };
 
   return (
-    <section className="booklist">
-    <div className="container">
+    <div className="books-container">
         
       {selectedBook ? (
-        <div className="cursor">
+
         <BookDetails book={selectedBook} onClose={handleBackToSearch} />
-        </div>
+
       ) : (
-        <div>
+        <div className="div-cont">
           {filteredData.map((book, index) => {
             return (
-              <ul key={index}>
+              <ul key={index} className="book-item">
                 <li>
-                  <div className="booklist-content grid">
-                    <span onClick={() => handleClick(book)}>
-                      Title: {book.title}
-                    </span>
-                    <span>Description: {book.description}</span>
-                  </div>
-                  <img
+                <img
                     src={book.book_cover}
                     alt="Cover"
+                    className="book-cover"
                     onClick={() => handleClick(book)}
                   />
+                  <div>
+                    <span className="book-title" onClick={() => handleClick(book)}>
+                      Title: {book.title}
+                    </span>
+                    <span className="book-description">Description: {book.description}</span>
+                  </div>
                 </li>
               </ul>
             );
@@ -75,7 +48,6 @@ const BookList = () => {
         </div>
       )}
     </div>
-    </section>
   );
 };
 

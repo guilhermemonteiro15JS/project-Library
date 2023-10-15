@@ -37,9 +37,6 @@ export const SearchProvider = ({ children }) => {
      setFilteredData(filteredBooks);
   };
 
-
-
-
   // Fetch data when the context is initialized
   useEffect(() => {
     fetchBooks().then((booksData) => {

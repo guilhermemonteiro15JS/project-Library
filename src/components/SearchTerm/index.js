@@ -13,7 +13,6 @@ const SearchTerm = () => {
 
   return (
     <div className="search-form">
-      <div className="container">
         <div className="search-form-content">
           <form className="search-form" onSubmit={handleSubmit}>
             <div className="search-form-elem flex flex-sb bg-white">
@@ -30,7 +29,6 @@ const SearchTerm = () => {
             </div>
           </form>
         </div>
-      </div>
     </div>
   );
 };
