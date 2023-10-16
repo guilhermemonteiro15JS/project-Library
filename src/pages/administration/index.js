@@ -7,6 +7,7 @@ const BookForm = () => {
     year: "",
     book_cover: "",
   });
+  const [delID, setDelID]= useState('')
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -22,28 +23,44 @@ const BookForm = () => {
     return token;
   };
 
-  const handleSubmit = (event) => {
+const handleDelete = (event) =>{
+    event.preventDefault();
+
+    var myHeaders = new Headers();
+    myHeaders.append("Authorization", getAuthToken());
+    
+    var requestOptions = {
+      method: 'DELETE',
+      headers: myHeaders,
+      redirect: 'follow'
+    };
+    
+    fetch(`/api/v1/book/${delID}`, requestOptions)
+      .then(response => response.text())
+      .then(result => console.log(result))
+      .catch(error => console.log('error', error));
+
+}
+
+
+  const handleCreate = (event) => {
     event.preventDefault();
 
     const yearConvert = parseInt(formData.year, 10);
-    const token = getAuthToken();
-    console.log(token);
 
     var myHeaders = new Headers();
-    myHeaders.append(
-      "Authorization", getAuthToken()
-    );
+    myHeaders.append("Authorization", getAuthToken());
 
     myHeaders.append("Content-Type", "application/json");
 
-    var raw = JSON.stringify({
+    let raw = JSON.stringify({
       title: formData.title,
       description: formData.description,
       year: yearConvert,
       book_cover: formData.book_cover,
     });
 
-    var requestOptions = {
+    let requestOptions = {
       method: "POST",
       headers: myHeaders,
       body: raw,
@@ -56,7 +73,6 @@ const BookForm = () => {
       .catch((error) => console.log("error", error));
 
     console.log("Dados do livro:", formData);
-    // Limpar o formulário após a submissão
     setFormData({
       title: "",
       description: "",
@@ -67,7 +83,7 @@ const BookForm = () => {
   return (
     <div>
       <h2>Introdução de um Novo Livro</h2>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleCreate}>
         <div>
           <label>Título:</label>
           <input
@@ -115,6 +131,24 @@ const BookForm = () => {
 
         <button type="submit">Adicionar Livro</button>
       </form>
+      <div>
+        <h2>Apagar Livros</h2>
+              <form onSubmit={handleDelete}>
+        <div>
+          <label>Título:</label>
+          <input
+            type="text"
+            name="title"
+            value={delID}
+            onChange={(e)=> setDelID(e.target.value)}
+            required
+          />
+        </div>
+
+
+        <button type="submit">Remover Livro</button>
+      </form>
+      </div>
     </div>
   );
 };
