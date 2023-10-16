@@ -5,6 +5,7 @@ import SignIn from "./pages/signin";
 import Library from "./pages/library";
 import Search from "./components/SearchTerm";
 import Registration from "./pages/registration";
+import Administration from "./pages/administration";
 import Footer from "./pages/components/footer";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
@@ -47,6 +48,7 @@ const App = () => {
             <Nav.Link href="/home">Home</Nav.Link>
             <Nav.Link href="/signIn">SignIn</Nav.Link>
             <Nav.Link href="/registration">Registration</Nav.Link>
+            <Nav.Link href="/administration">Administration</Nav.Link>
             <div className="search-container ml-auto">
               <div className="input-group">
                 <FormControl
@@ -73,6 +75,7 @@ const App = () => {
                 <Route path="/signIn" element={<SignIn />} />
                 <Route path="/search" element={<Search />} />
                 <Route path="/registration" element={<Registration />} />
+                <Route path="/administration" element={<Administration/>} />
               </Routes>
             </Col>
           </Row>

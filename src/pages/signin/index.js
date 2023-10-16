@@ -84,7 +84,12 @@ const SignIn = () => {
       console.error("Error fetching data:", error);
     }
     if (response?.ok) {
-      console.log('Use the response here!');
+
+      const data = await response.json();
+      console.log(data)
+      const token = data.data.token;
+      localStorage.setItem('authToken', token);
+
       alert('login sucessful:');
       navigate('/library');
     } else {
