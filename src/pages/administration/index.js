@@ -1,5 +1,18 @@
 import React, { useState } from "react";
 
+import {
+  BodyReg,
+  RegistrationStyled,
+  FormContainer,
+  Form,
+  FormGroup,
+  Label,
+  Input,
+  Button,
+  RegistrationForm,
+  StyledH2,
+} from "./styled";
+
 const BookForm = () => {
   const [formData, setFormData] = useState({
     title: "",
@@ -30,9 +43,7 @@ const BookForm = () => {
     console.log(token);
 
     var myHeaders = new Headers();
-    myHeaders.append(
-      "Authorization", getAuthToken()
-    );
+    myHeaders.append("Authorization", getAuthToken());
 
     myHeaders.append("Content-Type", "application/json");
 
@@ -65,57 +76,60 @@ const BookForm = () => {
   };
 
   return (
-    <div>
-      <h2>Introdução de um Novo Livro</h2>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>Título:</label>
-          <input
-            type="text"
-            id="title"
-            name="title"
-            value={formData.title}
-            onChange={handleInputChange}
-            required
-          />
-        </div>
-
-        <div>
-          <label>Descrição:</label>
-          <textarea
-            id="description"
-            name="description"
-            value={formData.description}
-            onChange={handleInputChange}
-            required
-          />
-        </div>
-
-        <div>
-          <label>Ano de Publicação:</label>
-          <input
-            type="text"
-            id="year"
-            name="year"
-            value={formData.year}
-            onChange={handleInputChange}
-            required
-          />
-        </div>
-        <div>
-          <label>Image:</label>
-          <input
-            type="text"
-            id="image"
-            name="book_cover"
-            value={formData.book_cover}
-            onChange={handleInputChange}
-          />
-        </div>
-
-        <button type="submit">Adicionar Livro</button>
-      </form>
-    </div>
+    <BodyReg>
+      <RegistrationStyled>
+        <FormContainer>
+          <StyledH2>
+            <h2>Introdução de um Novo Livro</h2>
+          </StyledH2>
+          <form onSubmit={handleSubmit}>
+            <FormGroup>
+              <Label>Título:</Label>
+              <Input
+                type="text"
+                id="title"
+                name="title"
+                value={formData.title}
+                onChange={handleInputChange}
+                required
+              />
+            </FormGroup>
+            <FormGroup>
+              <Label>Descrição:</Label>
+              <textarea
+                id="description"
+                name="description"
+                value={formData.description}
+                onChange={handleInputChange}
+                required
+              />
+            </FormGroup>
+            <FormGroup>
+              <Label>Ano de Publicação:</Label>
+              <Input
+                type="text"
+                id="year"
+                name="year"
+                value={formData.year}
+                onChange={handleInputChange}
+                required
+              />
+            </FormGroup>
+            <FormGroup>
+              <Label>Image:</Label>
+              <Input
+                type="text"
+                id="image"
+                name="book_cover"
+                value={formData.book_cover}
+                onChange={handleInputChange}
+              />
+            </FormGroup>
+            <Button type="submit">Adicionar Livro</Button>
+          </form>
+        </FormContainer>
+      </RegistrationStyled>
+    </BodyReg>
   );
 };
 

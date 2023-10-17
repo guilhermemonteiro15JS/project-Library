@@ -1,35 +1,39 @@
-import React, { useState } from "react";
+import React from "react";
 import { useSearch } from "../../SearchContext";
 import { FaSearch } from "react-icons/fa";
-import "./index.css"
+import { StyledSearch, StyledForm, StyledFormElem, StyledFormControl, StyledButton} from "./styled";
+
 
 const SearchTerm = () => {
   const { searchInput, handleSearch } = useSearch();
 
   const handleSubmit = (e) => {
-    e.preventDefault(); 
+    e.preventDefault();
     handleSearch(searchInput);
   };
 
   return (
-    <div className="search-form">
-        <div className="search-form-content">
-          <form className="search-form" onSubmit={handleSubmit}>
-            <div className="search-form-elem flex flex-sb bg-white">
-              <input
-                className="form-control"
-                type="search"
-                placeholder="Search here"
-                onChange={(e) => handleSearch(e.target.value)}
-                value={searchInput}
-              />
-              <button type="submit" onClick={() => handleSearch(searchInput)}>
-                <FaSearch className="text-purple" size={32} />
-              </button>
-            </div>
-          </form>
-        </div>
-    </div>
+    <StyledSearch>
+      <div className="search-form-content">
+        <StyledForm className="search-form" onSubmit={handleSubmit}>
+          <StyledFormElem className="search-form-elem flex flex-sb bg-white">
+            <StyledFormControl
+              className="form-control"
+              type="search"
+              placeholder="Search here"
+              onChange={(e) => handleSearch(e.target.value)}
+              value={searchInput}
+            />
+            <StyledButton
+              type="submit"
+              onClick={() => handleSearch(searchInput)}
+            >
+              <FaSearch className="text-purple" size={32} />
+            </StyledButton>
+          </StyledFormElem>
+        </StyledForm>
+      </div>
+    </StyledSearch>
   );
 };
 

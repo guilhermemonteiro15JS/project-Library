@@ -2,7 +2,15 @@ import React, { useState, useEffect } from "react";
 import BookDetails from "../BookDetails";
 //import SearchInput from "./SearchInput";
 import { useSearch } from "../../SearchContext";
-import "./index.css"
+
+import {
+  BooksContainer,
+  BookItem,
+  DivCont,
+  BookCover,
+  BookTitle,
+  BookDescription,
+} from "./styled";
 
 const BookList = () => {
     const{filteredData} = useSearch();;
@@ -17,37 +25,35 @@ const BookList = () => {
   };
 
   return (
-    <div className="books-container">
-        
+    <BooksContainer>
       {selectedBook ? (
-
         <BookDetails book={selectedBook} onClose={handleBackToSearch} />
-
       ) : (
-        <div className="div-cont">
+        <DivCont>
           {filteredData.map((book, index) => {
             return (
-              <ul key={index} className="book-item">
+              <BookItem key={index}>
                 <li>
-                <img
+                  <BookCover
                     src={book.book_cover}
                     alt="Cover"
-                    className="book-cover"
                     onClick={() => handleClick(book)}
                   />
                   <div>
-                    <span className="book-title" onClick={() => handleClick(book)}>
+                    <BookTitle onClick={() => handleClick(book)}>
                       Title: {book.title}
-                    </span>
-                    <span className="book-description">Description: {book.description}</span>
+                    </BookTitle>
+                    <BookDescription>
+                      Description: {book.description}
+                    </BookDescription>
                   </div>
                 </li>
-              </ul>
+              </BookItem>
             );
           })}
-        </div>
+        </DivCont>
       )}
-    </div>
+    </BooksContainer>
   );
 };
 

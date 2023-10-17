@@ -1,25 +1,36 @@
 import React from "react";
-import "./library.css";
 import SearchTerm from "../../components/SearchTerm";
-import BookList from "../../components/BookList"
+import BookList from "../../components/BookList";
 import { SearchProvider } from "../../SearchContext";
+import imagem from "../../assets/Prancheta2.png";
+import {
+  StyledBody,
+  HeaderContent,
+  HeaderTitle,
+  SearchLib,
+  ListStyled,
+  FixedImage,
+} from "./styled";
 
 const Library = () => {
   return (
-    <SearchProvider>
-          <div id="holder">
-      <header className="header">
-        <div className="header-content flex flex-c text-center text-white">
-          <h2 className="header-title text-capitalize"> Find your book</h2>
-          <SearchTerm/>
-        </div>
-      </header>
-      <div className="div-grid" >
-      <BookList />
-        </div>
-      </div>
-      </SearchProvider>
+    <StyledBody>
+      <SearchProvider>
+        <FixedImage src={imagem} alt="Background" />
 
+        <header className="header">
+          <div className="header-content flex flex-c text-center text-white">
+            <HeaderTitle>Find your book</HeaderTitle>
+            <SearchLib>
+              <SearchTerm />
+            </SearchLib>
+          </div>
+        </header>
+        <ListStyled>
+          <BookList />
+        </ListStyled>
+      </SearchProvider>
+    </StyledBody>
   );
 };
 
