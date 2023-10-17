@@ -1,4 +1,8 @@
 import React, { useState } from "react";
+import AddBook from "../../components/AddBook";
+import DeleteBook from "../../components/DeleteBook";
+import UpdateBook from "../../components/UpdateBook";
+import UpdateUser from "../../components/UpdateProfile";
 
 import {
   BodyReg,
@@ -13,51 +17,30 @@ import {
   StyledH2,
 } from "./styled";
 
-const BookForm = () => {
-  const [formData, setFormData] = useState({
-    title: "",
-    description: "",
-    year: "",
-    book_cover: "",
-  });
+const Administration = () => {
+  const[isClicked, setIsClicked] = useState(false);
 
-  const handleInputChange = (event) => {
-    const { name, value } = event.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
+  const getUserInfo = (value) => {
+    const dataString = localStorage.getItem("userData");
+    const userData = JSON.parse(dataString);
+  
+
+    if (value) {
+      return userData[value];
+    } else {
+      return userData;
+    }
   };
 
-  const getAuthToken = () => {
-    const token = localStorage.getItem("authToken");
-
-    return token;
-  };
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-
-    const yearConvert = parseInt(formData.year, 10);
-    const token = getAuthToken();
-    console.log(token);
-
-    var myHeaders = new Headers();
-    myHeaders.append("Authorization", getAuthToken());
+  const handleBookCreate = (newBookData) => {
+    let myHeaders = new Headers();
+    myHeaders.append("Authorization", getUserInfo("token"));
 
     myHeaders.append("Content-Type", "application/json");
-
-    var raw = JSON.stringify({
-      title: formData.title,
-      description: formData.description,
-      year: yearConvert,
-      book_cover: formData.book_cover,
-    });
-
-    var requestOptions = {
+    let requestOptions = {
       method: "POST",
       headers: myHeaders,
-      body: raw,
+      body: JSON.stringify(newBookData),
       redirect: "follow",
     };
 
@@ -66,17 +49,94 @@ const BookForm = () => {
       .then((result) => console.log(result))
       .catch((error) => console.log("error", error));
 
-    console.log("Dados do livro:", formData);
-    // Limpar o formulário após a submissão
-    setFormData({
-      title: "",
-      description: "",
-      year: "",
-    });
   };
 
+  const handleBookDelete = (bookID) => {
+
+    let myHeaders = new Headers();
+    myHeaders.append("Authorization", getUserInfo("token"));
+
+    let requestOptions = {
+      method: "DELETE",
+      headers: myHeaders,
+      redirect: "follow",
+    };
+
+    fetch(`/api/v1/book/${bookID}`, requestOptions)
+      .then((response) => response.text())
+      .then((result) => console.log(result))
+      .catch((error) => console.log("error", error));
+  };
+
+  const handleBookUpdate = (bookID, updateData)=> {
+
+
+    let myHeaders = new Headers();
+    myHeaders.append("Authorization", getUserInfo("token"));
+    myHeaders.append("Content-Type", "application/json");
+
+
+    let requestOptions = {
+      method: "PUT",
+      headers: myHeaders,
+      body: JSON.stringify(updateData),
+      redirect: "follow",
+    };
+
+    fetch(`/api/v1/book/${bookID}`, requestOptions)
+      .then((response) => response.text())
+      .then((result) => console.log(result))
+      .catch((error) => console.log("error", error));
+  }; 
+
+  const handleUserUpdate= (updatedUserData) =>{
+   
+    let myHeaders = new Headers();
+    myHeaders.append("Authorization", getUserInfo("token"));
+    myHeaders.append("Content-Type", "application/json");
+    
+    
+    let requestOptions = {
+      method: 'PUT',
+      headers: myHeaders,
+      body: JSON.stringify(updatedUserData),
+      redirect: 'follow'
+    };
+    
+    fetch("/api/v1/user/profile", requestOptions)
+      .then(response => response.text())
+      .then(result => console.log(result))
+      .catch(error => console.log('error', error));
+
+  }
+
   return (
+    
     <BodyReg>
+    <div>
+      <div>
+        <p>User Name: {getUserInfo("name")}</p>
+        <p>Email: {getUserInfo("email")}</p>
+        <p>
+          <img src={getUserInfo("profile_picture")} alt="User" />
+        </p>
+        <button onClick={()=>setIsClicked(!isClicked ? true : false)}>Atualizar profile</button>
+      </div>
+      <div>      {isClicked ?(
+        <UpdateUser onUpdateUser={handleUserUpdate}/>
+      ): ('')}
+      </div>
+      <div>
+      <AddBook onBookAdded={handleBookCreate} />
+      </div>
+
+     <div>
+        <DeleteBook onDeleteBook={handleBookDelete} />
+        </div>
+        <div>
+          <UpdateBook onBookUpdated={handleBookUpdate}/>
+        </div>
+    </div>
       <RegistrationStyled>
         <FormContainer>
           <StyledH2>
@@ -133,4 +193,4 @@ const BookForm = () => {
   );
 };
 
-export default BookForm;
+export default Administration;

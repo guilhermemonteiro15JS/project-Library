@@ -9,8 +9,6 @@ import {
 } from "./styled";
 
 const BookDetails = ({ book, onClose }) => {
-  const teste = `http://5.22.217.225:8081/api/v1/book/${book.id}`;
-  console.log(teste);
 
   const deleteBook = async (e) => {
     const response = await fetch(
@@ -34,6 +32,7 @@ const BookDetails = ({ book, onClose }) => {
     <BookDetailsContainer>
       <BookTitle>{book.title}</BookTitle>
       <BookDescription>Description: {book.description}</BookDescription>
+      <p>ID:{book.id}</p>
       <BookCover src={book.book_cover} alt="Cover" />
       <CloseButton onClick={onClose}>
         <i class="bi bi-arrow-left-circle"></i>
