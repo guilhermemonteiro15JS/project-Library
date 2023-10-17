@@ -82,18 +82,16 @@ const SignIn = ({ updateLoginStatus }) => {
     }
     if (response?.ok) {
       const data = await response.json();
-      console.log(data);
-      const token = data.data.token;
-      localStorage.setItem("authToken", token);
-
+      localStorage.setItem ("userData",JSON.stringify(data.data));
+      console.log(data.data)
       updateLoginStatus(true);
       alert("login sucessful:");
       navigate("/library");
     } else {
-      console.log(`HTTP Response Code: ${response?.status}`);
-      alert("login failed");
-      setEmail("");
-      setPassword("");
+      console.log(`HTTP Response Code: ${response?.status}`)
+      alert('login failed')
+      setEmail('')
+      setPassword('')
     }
   };
   return (
