@@ -142,51 +142,20 @@ const Administration = () => {
           <StyledH2>
             <h2>Introdução de um Novo Livro</h2>
           </StyledH2>
-          <form onSubmit={handleSubmit}>
             <FormGroup>
               <Label>Título:</Label>
-              <Input
-                type="text"
-                id="title"
-                name="title"
-                value={formData.title}
-                onChange={handleInputChange}
-                required
-              />
             </FormGroup>
             <FormGroup>
               <Label>Descrição:</Label>
-              <textarea
-                id="description"
-                name="description"
-                value={formData.description}
-                onChange={handleInputChange}
-                required
-              />
             </FormGroup>
             <FormGroup>
               <Label>Ano de Publicação:</Label>
-              <Input
-                type="text"
-                id="year"
-                name="year"
-                value={formData.year}
-                onChange={handleInputChange}
-                required
-              />
             </FormGroup>
             <FormGroup>
               <Label>Image:</Label>
-              <Input
-                type="text"
-                id="image"
-                name="book_cover"
-                value={formData.book_cover}
-                onChange={handleInputChange}
-              />
+
             </FormGroup>
             <Button type="submit">Adicionar Livro</Button>
-          </form>
         </FormContainer>
       </RegistrationStyled>
     </BodyReg>
