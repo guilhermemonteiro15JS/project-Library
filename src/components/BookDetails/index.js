@@ -4,8 +4,6 @@ import {AiFillCloseCircle} from 'react-icons/ai'
 
 
 const BookDetails = ({ book, onClose }) => {
-  const teste= `http://5.22.217.225:8081/api/v1/book/${book.id}`
-  console.log(teste);
 
   const deleteBook= async (e) =>{
     const response = await fetch(`http://5.22.217.225:8081/api/v1/book/${book.id}`, {
@@ -28,6 +26,7 @@ const BookDetails = ({ book, onClose }) => {
     <div>
       <h2>{book.title}</h2>
       <p>Description: {book.description}</p>
+      <p>ID:{book.id}</p>
       <img src={book.book_cover} alt="Cover" />
       <button onClick={onClose}>
       <AiFillCloseCircle size={32}/>

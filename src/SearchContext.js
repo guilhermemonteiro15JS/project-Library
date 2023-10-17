@@ -30,14 +30,13 @@ export const SearchProvider = ({ children }) => {
 
   const handleSearch = (inputValue) => {
     setSearchInput(inputValue);
-       // Filtrar os dados com base no valor da entrada de pesquisa
+  
        const filteredBooks = data.filter((book) =>
        book.title.toLowerCase().includes(inputValue.toLowerCase())
      );
      setFilteredData(filteredBooks);
   };
 
-  // Fetch data when the context is initialized
   useEffect(() => {
     fetchBooks().then((booksData) => {
       setData(booksData);
