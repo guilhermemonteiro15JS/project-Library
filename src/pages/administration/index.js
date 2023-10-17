@@ -4,6 +4,19 @@ import DeleteBook from "../../components/DeleteBook";
 import UpdateBook from "../../components/UpdateBook";
 import UpdateUser from "../../components/UpdateProfile";
 
+import {
+  BodyReg,
+  RegistrationStyled,
+  FormContainer,
+  Form,
+  FormGroup,
+  Label,
+  Input,
+  Button,
+  RegistrationForm,
+  StyledH2,
+} from "./styled";
+
 const Administration = () => {
   const[isClicked, setIsClicked] = useState(false);
 
@@ -98,6 +111,8 @@ const Administration = () => {
   }
 
   return (
+    
+    <BodyReg>
     <div>
       <div>
         <p>User Name: {getUserInfo("name")}</p>
@@ -122,6 +137,59 @@ const Administration = () => {
           <UpdateBook onBookUpdated={handleBookUpdate}/>
         </div>
     </div>
+      <RegistrationStyled>
+        <FormContainer>
+          <StyledH2>
+            <h2>Introdução de um Novo Livro</h2>
+          </StyledH2>
+          <form onSubmit={handleSubmit}>
+            <FormGroup>
+              <Label>Título:</Label>
+              <Input
+                type="text"
+                id="title"
+                name="title"
+                value={formData.title}
+                onChange={handleInputChange}
+                required
+              />
+            </FormGroup>
+            <FormGroup>
+              <Label>Descrição:</Label>
+              <textarea
+                id="description"
+                name="description"
+                value={formData.description}
+                onChange={handleInputChange}
+                required
+              />
+            </FormGroup>
+            <FormGroup>
+              <Label>Ano de Publicação:</Label>
+              <Input
+                type="text"
+                id="year"
+                name="year"
+                value={formData.year}
+                onChange={handleInputChange}
+                required
+              />
+            </FormGroup>
+            <FormGroup>
+              <Label>Image:</Label>
+              <Input
+                type="text"
+                id="image"
+                name="book_cover"
+                value={formData.book_cover}
+                onChange={handleInputChange}
+              />
+            </FormGroup>
+            <Button type="submit">Adicionar Livro</Button>
+          </form>
+        </FormContainer>
+      </RegistrationStyled>
+    </BodyReg>
   );
 };
 
