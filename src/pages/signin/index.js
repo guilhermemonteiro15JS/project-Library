@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import imagem from "../../assets/3DBooks.jpeg";
-import { SigninStyled, ImageContainer, Image, FormContainer, SignInTitle,
+import { SigninStyled, ImageContainer, Image, FormContainer,
 Form,
 FormGroup,
 Label,
@@ -35,13 +35,6 @@ const SignIn = () => {
       
       localStorage.setItem ("userData",JSON.stringify(data.data));
       console.log(data.data)
-      // localStorage.setItem("authToken", token);
-/*       const uName = data.data.name;
-      localStorage.setItem("userName", uName);
-      const uEmai = data.data.email;
-      localStorage.setItem("userEmail", uEmai);
-      const pPicture = data.data.email;
-      localStorage.setItem("userPicture", pPicture); */
 
       alert("login sucessful:");
       navigate("/library");
