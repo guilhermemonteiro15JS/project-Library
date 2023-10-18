@@ -94,6 +94,7 @@ const AddBook = ({ onBookAdded }) => {
                 type="text"
                 id="image"
                 name="book_cover"
+                placeholder="Url da imagem"
                 value={formData.book_cover}
                 onChange={handleInputChange}
               />
