@@ -1,5 +1,4 @@
-# Getting Started with Create React App
-
+# GoodReads From Wish
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## The Objective
@@ -21,3 +20,5 @@ npm start
 - [Guilherme Monteiro](https://github.com/guilhermemonteiro15js)
 - [Ricardo Oliveira](https://github.com/ricardoszs)
 
+## Created with
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
