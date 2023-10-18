@@ -87,7 +87,7 @@ const SignIn = () => {
           <div>
             <Label2>Se não estás registado, clica abaixo</Label2>
             <Button onClick={() => navigate("/registration")}>
-              Registration
+              Registrar
             </Button>
           </div>
         </Form>
