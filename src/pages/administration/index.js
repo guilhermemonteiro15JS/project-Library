@@ -1,29 +1,24 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import AddBook from "../../components/AddBook";
 import DeleteBook from "../../components/DeleteBook";
 import UpdateBook from "../../components/UpdateBook";
 import UpdateUser from "../../components/UpdateProfile";
 
 import {
-  BodyReg,
-  RegistrationStyled,
-  FormContainer,
-  Form,
-  FormGroup,
-  Label,
-  Input,
+  Container,
+  UserInfoContainer,
+  UserName,
+  Email,
+  ProfileImage,
   Button,
-  RegistrationForm,
-  StyledH2,
 } from "./styled";
 
 const Administration = () => {
-  const[isClicked, setIsClicked] = useState(false);
+  const [isClicked, setIsClicked] = useState(false);
 
   const getUserInfo = (value) => {
     const dataString = localStorage.getItem("userData");
     const userData = JSON.parse(dataString);
-  
 
     if (value) {
       return userData[value];
@@ -48,11 +43,9 @@ const Administration = () => {
       .then((response) => response.text())
       .then((result) => console.log(result))
       .catch((error) => console.log("error", error));
-
   };
 
   const handleBookDelete = (bookID) => {
-
     let myHeaders = new Headers();
     myHeaders.append("Authorization", getUserInfo("token"));
 
@@ -68,13 +61,10 @@ const Administration = () => {
       .catch((error) => console.log("error", error));
   };
 
-  const handleBookUpdate = (bookID, updateData)=> {
-
-
+  const handleBookUpdate = (bookID, updateData) => {
     let myHeaders = new Headers();
     myHeaders.append("Authorization", getUserInfo("token"));
     myHeaders.append("Content-Type", "application/json");
-
 
     let requestOptions = {
       method: "PUT",
@@ -87,78 +77,66 @@ const Administration = () => {
       .then((response) => response.text())
       .then((result) => console.log(result))
       .catch((error) => console.log("error", error));
-  }; 
+  };
 
-  const handleUserUpdate= (updatedUserData) =>{
-   
+  const handleUserUpdate = async (updatedUserData) => {
     let myHeaders = new Headers();
     myHeaders.append("Authorization", getUserInfo("token"));
     myHeaders.append("Content-Type", "application/json");
-    
-    
+
     let requestOptions = {
-      method: 'PUT',
+      method: "PUT",
       headers: myHeaders,
       body: JSON.stringify(updatedUserData),
-      redirect: 'follow'
+      redirect: "follow",
     };
-    
-    fetch("/api/v1/user/profile", requestOptions)
+    let response;
+    try {
+      response = await fetch("/api/v1/user/profile", requestOptions);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+    if (response?.ok) {
+      const data = await response.json();
+
+      localStorage.setItem("userData", JSON.stringify(data.data));
+      console.log(data.data);
+    } else {
+      console.log(`HTTP Response Code: ${response?.status}`);
+    }
+
+    /* fetch("/api/v1/user/profile", requestOptions)
       .then(response => response.text())
       .then(result => console.log(result))
       .catch(error => console.log('error', error));
+ */
+  };
 
-  }
+  useEffect(() => {
+    getUserInfo();
+  }, [isClicked]);
 
   return (
-    
-    <BodyReg>
     <div>
-      <div>
-        <p>User Name: {getUserInfo("name")}</p>
-        <p>Email: {getUserInfo("email")}</p>
-        <p>
-          <img src={getUserInfo("profile_picture")} alt="User" />
-        </p>
-        <button onClick={()=>setIsClicked(!isClicked ? true : false)}>Atualizar profile</button>
-      </div>
-      <div>      {isClicked ?(
-        <UpdateUser onUpdateUser={handleUserUpdate}/>
-      ): ('')}
-      </div>
-      <div>
+      <Container>
+        <UserInfoContainer>
+          <ProfileImage src={getUserInfo("profile_picture")} alt="User" />
+          <UserName>User Name: {getUserInfo("name")}</UserName>
+          <Email>Email: {getUserInfo("email")}</Email>
+          <Button onClick={() => setIsClicked(!isClicked)}>
+            Atualizar perfil
+          </Button>
+        </UserInfoContainer>
+
+        {isClicked && <UpdateUser onUpdateUser={handleUserUpdate} />}
+      </Container>
+
       <AddBook onBookAdded={handleBookCreate} />
-      </div>
 
-     <div>
-        <DeleteBook onDeleteBook={handleBookDelete} />
-        </div>
-        <div>
-          <UpdateBook onBookUpdated={handleBookUpdate}/>
-        </div>
+      <DeleteBook onDeleteBook={handleBookDelete} />
+
+      <UpdateBook onBookUpdated={handleBookUpdate} />
     </div>
-      <RegistrationStyled>
-        <FormContainer>
-          <StyledH2>
-            <h2>Introdução de um Novo Livro</h2>
-          </StyledH2>
-            <FormGroup>
-              <Label>Título:</Label>
-            </FormGroup>
-            <FormGroup>
-              <Label>Descrição:</Label>
-            </FormGroup>
-            <FormGroup>
-              <Label>Ano de Publicação:</Label>
-            </FormGroup>
-            <FormGroup>
-              <Label>Image:</Label>
-
-            </FormGroup>
-            <Button type="submit">Adicionar Livro</Button>
-        </FormContainer>
-      </RegistrationStyled>
-    </BodyReg>
   );
 };
 

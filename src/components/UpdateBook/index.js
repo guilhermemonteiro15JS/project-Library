@@ -1,4 +1,15 @@
 import React, { useState } from "react";
+import {
+  BodyReg,
+  RegistrationStyled,
+  FormContainer,
+  Form,
+  FormGroup,
+  Label,
+  Input,
+  Button,
+  StyledH2,
+} from "./styled";
 
 const UpdateBook = ({ onBookUpdated }) => {
   const [bookID, setBookID] = useState("");
@@ -39,63 +50,71 @@ const UpdateBook = ({ onBookUpdated }) => {
   };
 
   return (
-    <div>
-      <h2>Atualizar um Livro</h2>
-      <form onSubmit={handleBookUpdate}>
-        <div>
-          <label>ID do livro a atualizar:</label>
-          <input
+    <BodyReg>
+      <RegistrationStyled>
+        <FormContainer>
+        <StyledH2>
+          <Label>Atualizar um Livro</Label>
+          </StyledH2>
+          <Form onSubmit={handleBookUpdate}>
+            <FormGroup>
+              <Label>ID do Livro:</Label>
+              <Input
             type="text"
             name="ID"
             onChange={(e) => setBookID(e.target.value)}
             required
           />
-        </div>
-        <div>
-          <label>Título:</label>
-          <input
+          </FormGroup>
+          <FormGroup>
+            <Label>Título:</Label>
+          <Input
             type="text"
             id="title"
             name="title"
             value={formData.title}
             onChange={handleInputChange}
+            required
           />
-        </div>
-
-        <div>
-          <label>Descrição:</label>
-          <textarea
+            </FormGroup>
+            <FormGroup>
+            <Label>Descrição:</Label>
+          <Input
             id="description"
             name="description"
             value={formData.description}
             onChange={handleInputChange}
+            required
           />
-        </div>
-
-        <div>
-          <label>Ano de Publicação:</label>
-          <input
+            </FormGroup>
+            <FormGroup>
+            <Label>Ano de Publicação:</Label>
+          <Input
             type="text"
             id="year"
             name="year"
             value={formData.year}
             onChange={handleInputChange}
+            required
           />
-        </div>
-        <div>
-          <label>Image:</label>
-          <input
+            </FormGroup>
+            <FormGroup>
+            <Label>Imagem:</Label>
+          <Input
             type="text"
             id="image"
             name="book_cover"
             value={formData.book_cover}
             onChange={handleInputChange}
           />
-        </div>
-
-        <button type="submit">Atualizar Livro</button>
-      </form>
-    </div>
+            </FormGroup>
+            <Button type="submit">Atualizar Livro</Button>
+            </Form> 
+        </FormContainer>
+      </RegistrationStyled>
+        
+    </BodyReg>
+  
   );
 };
 

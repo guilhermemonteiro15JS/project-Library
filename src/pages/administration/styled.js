@@ -1,58 +1,33 @@
 import styled from "styled-components";
 
-export const BodyReg = styled.body`
-  display: flex;
-  justify-content: center;
-`;
-
-export const RegistrationStyled = styled.div`
-  display: flex;
-  align-items: flex-start;
-`;
-
-export const FormContainer = styled.div`
-  flex: 1;
+export const Container = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
-  margin: 250px;
-  margin-top: 100px;
-  color: white;
-`;
-
-export const Form = styled.form`
-  display: flex;
-  flex-direction: column;
-  align-content: flex-end;
-`;
-
-export const FormGroup = styled.div`
-  margin-bottom: 15px;
-  display: flex;
-  flex-direction: row;
   align-items: center;
-  justify-content: flex-end;
+  gap: 20px;
 `;
 
-export const Label = styled.label`
-  font-weight: 1;
-  margin-right: 10px;
-  color: black;
+export const UserInfoContainer = styled.div`
+  text-align: center;
 `;
 
-export const Input = styled.input`
-  padding: 10px;
-  margin-top: 5px;
-  margin-left: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+export const UserName = styled.p`
+  font-size: 20px;
+  font-weight: bold;
+`;
+
+export const Email = styled.p`
+  font-size: 16px;
+`;
+
+export const ProfileImage = styled.img`
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
 `;
 
 export const Button = styled.button`
-  display: flex;
-  justify-items: center;
-  border-radius: 20px;
+    border-radius: 20px;
   background-color: #30a9d9;
   color: #fff;
   padding: 18px 30px;
@@ -60,8 +35,10 @@ export const Button = styled.button`
   outline: none;
   cursor: pointer;
   border: none;
-`;
 
-export const StyledH2 = styled.h2`
-  color: black;
+  transition: background-color 0.3s;
+
+  &:hover {
+    background-color: #007bff;
+  }
 `;

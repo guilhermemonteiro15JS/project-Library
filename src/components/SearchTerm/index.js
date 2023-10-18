@@ -28,7 +28,7 @@ const SearchTerm = () => {
               type="submit"
               onClick={() => handleSearch(searchInput)}
             >
-              <FaSearch className="text-purple" size={32} />
+              <FaSearch size={32} />
             </StyledButton>
           </StyledFormElem>
         </StyledForm>

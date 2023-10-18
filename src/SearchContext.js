@@ -14,7 +14,7 @@ export const SearchProvider = ({ children }) => {
 
   const fetchBooks = async () => {
     try {
-      const response = await fetch("http://5.22.217.225:8081/api/v1/book/");
+      const response = await fetch("/api/v1/book/");
       const result = await response.json();
       console.log(result);
 

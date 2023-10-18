@@ -1,5 +1,17 @@
 import React, { useState } from "react";
 
+import {
+  BodyReg,
+  RegistrationStyled,
+  FormContainer,
+  Form,
+  FormGroup,
+  Label,
+  Input,
+  Button,
+  StyledH2,
+} from "./styled";
+
 const UpdateUser = ({ onUpdateUser }) => {
   const [formData, setFormData] = useState({
     name: "",
@@ -28,40 +40,53 @@ const UpdateUser = ({ onUpdateUser }) => {
   };
 
   return (
-    <div>
-      <h2>Atualizar Dados do Utilizador</h2>
-      <form onSubmit={handleUserUpdate}>
-        <div>
-          <label>Nome:</label>
-          <input
+    <BodyReg>
+<RegistrationStyled>
+  <FormContainer>
+    <StyledH2>
+    <Label>Atualizar Dados do Utilizador</Label>
+    </StyledH2>
+    <Form onSubmit={handleUserUpdate}>
+      <FormGroup>
+
+      <Label>Nome:</Label>
+          <Input
             type="text"
             name="name"
             value={formData.name}
             onChange={handleInputChange}
           />
-        </div>
-        <div>
-          <label>Email:</label>
-          <input
+      </FormGroup>
+      <FormGroup>
+      <Label>Email:</Label>
+          <Input
             type="email"
             name="email"
             value={formData.email}
             onChange={handleInputChange}
           />
-        </div>
-        <div>
-          <label>Foto de Perfil:</label>
-          <input
+ 
+      </FormGroup>
+      <FormGroup>
+      <Label>Foto de Perfil:</Label>
+          <Input
             type="text"
             name="profile_picture"
             value={formData.profile_picture}
             onChange={handleInputChange}
           />
-        </div>
+ 
+      </FormGroup>
+      <Button type="submit">Atualizar Dados</Button>
+    </Form>
+  </FormContainer>
+</RegistrationStyled>
+      
+      
 
-        <button type="submit">Atualizar Dados</button>
-      </form>
-    </div>
+
+    </BodyReg>
+    
   );
 };
 

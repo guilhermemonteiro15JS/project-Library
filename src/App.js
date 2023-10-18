@@ -22,8 +22,6 @@ import {
   Button,
 } from "react-bootstrap";
 
-
-
 const App = () => {
   // const [usAuthenticated, SetIsAtuthenthicated] = useState(false);
   // const navigate = useNavigate();
@@ -38,7 +36,8 @@ const App = () => {
       <StyledNav>
         <Navbar collapseOnSelect expand="lg" variant="dark">
           <Navbar.Brand href="/home">
-            <i class="bi bi-book"></i>Book da Wish<i class="bi bi-book"></i>
+            <i className="bi bi-book"></i>Book da Wish
+            <i className="bi bi-book"></i>
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
@@ -48,7 +47,7 @@ const App = () => {
               <Nav.Link href="/registration">Registration</Nav.Link>
               <Nav.Link href="/library">Library</Nav.Link>
               <Nav.Link href="/administration">
-                <i class="bi bi-person-circle"></i>
+                <i className="bi bi-person-circle"></i>
               </Nav.Link>
             </Nav>
           </Navbar.Collapse>
