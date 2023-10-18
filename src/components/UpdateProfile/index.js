@@ -72,6 +72,7 @@ const UpdateUser = ({ onUpdateUser }) => {
           <Input
             type="text"
             name="profile_picture"
+            placeholder="Url da imagem"
             value={formData.profile_picture}
             onChange={handleInputChange}
           />
