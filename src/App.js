@@ -9,7 +9,7 @@ import Administration from "./pages/administration";
 import Footer from "./pages/components/footer";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
-import { BodyApp, StyledNav, PageContent } from "./appstyled";
+import styled from "styled-components";
 
 import {
   Container,
@@ -22,98 +22,93 @@ import {
   Button,
 } from "react-bootstrap";
 
-
+const BodyApp = styled.body`
+  min-height: 100vh;
+  background-color: papayawhip;
+  margin: 0 auto;
+`;
 
 const App = () => {
-  // const [usAuthenticated, SetIsAtuthenthicated] = useState(false);
-  // const navigate = useNavigate();
+  const [loggedIn, setLoggedIn] = useState(false);
 
-  // const SiginON = () => {
-  //   SetIsAtuthenthicated(false);
-  //   navigate("/sigIn");
-  // };
+  const updateLoginStatus = (status) => {
+    setLoggedIn(status);
+  };
+
+  const logout = () => {
+    updateLoginStatus(false);
+  };
 
   return (
     <BrowserRouter>
-      <StyledNav>
-        <Navbar collapseOnSelect expand="lg" variant="dark">
-          <Navbar.Brand href="/home">
-            <i class="bi bi-book"></i>Book da Wish<i class="bi bi-book"></i>
-          </Navbar.Brand>
-          <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-          <Navbar.Collapse id="responsive-navbar-nav">
-            <Nav className="nav-bar">
-              <Nav.Link href="/home">Home</Nav.Link>
-              <Nav.Link href="/signIn">SignIn</Nav.Link>
-              <Nav.Link href="/registration">Registration</Nav.Link>
-              <Nav.Link href="/library">Library</Nav.Link>
-              <Nav.Link href="/administration">
-                <i class="bi bi-person-circle"></i>
-              </Nav.Link>
-            </Nav>
-          </Navbar.Collapse>
-        </Navbar>
-      </StyledNav>
+      <Navbar
+        collapseOnSelect
+        expand="lg"
+        bg="dark"
+        variant="dark"
+        className="sticky-top"
+      >
+        <Navbar.Brand as={Link} to={loggedIn ? "/home" : "/signIn"}>
+          Library Store
+        </Navbar.Brand>
+        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+        <Navbar.Collapse id="responsive-navbar-nav">
+          <Nav className="nav-bar">
+            {loggedIn ? (
+              <>
+                <Nav.Link as={Link} to="/home">
+                  Home
+                </Nav.Link>
+                <Nav.Link as={Link} to="/library">
+                  Library
+                </Nav.Link>
+                <Nav.Link as={Link} to="/search">
+                  Search
+                </Nav.Link>
+                <div className="search-container ml-auto"></div>
+                <Button
+                  variant="outline-info"
+                  onClick={logout}
+                  className="custom-button"
+                >
+                  Logout
+                </Button>
+              </>
+            ) : (
+              <>
+                <Nav.Link as={Link} to="/home">
+                  Home
+                </Nav.Link>
+                <Nav.Link as={Link} to="/signIn">
+                  SignIn
+                </Nav.Link>
+                <Nav.Link as={Link} to="/registration">
+                  Registration
+                </Nav.Link>
+                <Nav.Link as={Link} to="/administration">
+                  Administration
+                </Nav.Link>
+                <div className="search-container ml-auto"></div>
+              </>
+            )}
+          </Nav>
+        </Navbar.Collapse>
+      </Navbar>
       <Container>
         <Row>
           <Col>
             <Routes>
               <Route
                 path="/"
-                element={
-                  <PageContent>
-                    <SignIn />
-                  </PageContent>
-                }
+                element={<SignIn updateLoginStatus={updateLoginStatus} />}
               />
-              <Route
-                path="/home"
-                element={
-                  <PageContent>
-                    <Home />
-                  </PageContent>
-                }
-              />
-              <Route
-                path="/library"
-                element={
-                  <PageContent>
-                    <Library />
-                  </PageContent>
-                }
-              />
-              <Route
-                path="/signIn"
-                element={
-                  <PageContent>
-                    <SignIn />
-                  </PageContent>
-                }
-              />
-              <Route
-                path="/registration"
-                element={
-                  <PageContent>
-                    <Registration />
-                  </PageContent>
-                }
-              />
-              <Route
-                path="/administration"
-                element={
-                  <PageContent>
-                    <Administration />
-                  </PageContent>
-                }
-              />
-              <Route
-                path="/library"
-                element={
-                  <PageContent>
-                    <Library />
-                  </PageContent>
-                }
-              />
+              <Route path="/" element={<SignIn />} />
+              <Route path="/home" element={<Home />} />
+              <Route path="/library" element={<Library />} />
+              <Route path="/signIn" element={<SignIn />} />
+              <Route path="/search" element={<Search />} />
+              <Route path="/registration" element={<Registration />} />
+              <Route path="/administration" element={<Administration />} />
             </Routes>
           </Col>
         </Row>

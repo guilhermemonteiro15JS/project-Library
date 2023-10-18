@@ -9,7 +9,7 @@ Label2,
 Input,
 Button } from "./styled";
 
-const SignIn = () => {
+const SignIn = ({updateLoginStatus}) => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -35,15 +35,8 @@ const SignIn = () => {
       
       localStorage.setItem ("userData",JSON.stringify(data.data));
       console.log(data.data)
-      // localStorage.setItem("authToken", token);
-/*       const uName = data.data.name;
-      localStorage.setItem("userName", uName);
-      const uEmai = data.data.email;
-      localStorage.setItem("userEmail", uEmai);
-      const pPicture = data.data.email;
-      localStorage.setItem("userPicture", pPicture); */
-
       alert("login sucessful:");
+      updateLoginStatus(true);
       navigate("/library");
     } else {
       console.log(`HTTP Response Code: ${response?.status}`);
